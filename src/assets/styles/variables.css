@@ -1,0 +1,13 @@
+:root {
+  --primary-font-family: "Montserrat";
+  --secondary-font-family: "Open Sans";
+  --primary-color: #EB5440;
+  --secondary-color: #4A4B4C;
+  --tertiary-color: #E8E8E8;
+  --quaternary-color: #C3C3C3;
+  --bacground-1-color: #F6F6F6;
+  --backgrund-2-color: #FFFFFF;
+  --primary-text-color: #000000;
+  --secondary-text-color: #4A4B4C;
+  --hyperlink-text-color: #067BC2;
+}
