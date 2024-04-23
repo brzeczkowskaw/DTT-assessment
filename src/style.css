@@ -1,0 +1,135 @@
+a {
+  font-weight: 500;
+  color: var(--hyperlink-text-color);
+  text-decoration: inherit;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+  font-family: var(--secondary-font-family);
+  font-weight: 400;
+  font-size: 18px;
+  @media (max-width: 400px) {
+    font-size: 12px;
+  }
+}
+
+h1 {
+  font-family: var(--primary-font-family);
+  font-weight: bold;
+  font-size: 32px;
+  @media (max-width: 400px) {
+    font-size: 18px;
+  }
+}
+
+h2 {
+  font-family: var(--primary-font-family);
+  font-weight: bold;
+  font-size: 22px;
+  @media (max-width: 400px) {
+    font-size: 14px;
+  }
+}
+
+button {
+  font-family: var(--primary-font-family);
+  font-weight: bold;
+  font-size: 18px;
+  @media (max-width: 400px) {
+    font-size: 12px;
+  }
+}
+
+tab {
+  font-family: var(--primary-font-family);
+  font-weight: bold;
+  font-size: 18px;
+  @media (max-width: 400px) {
+    font-size: 12px;
+  }
+}
+
+#app {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.error-message {
+  font-family: var(--primary-font-family);
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 500;
+  @media (max-width: 400px) {
+    font-size: 12px;
+  }
+}
+
+.listing-information {
+  font-family: var(--secondary-font-family);
+  font-size: 16px;
+  font-weight: 400;
+  @media (max-width: 400px) {
+    font-size: 12px;
+  }
+}
+
+input {
+  font-family: var(--secondary-font-family);
+  font-size: 14px;
+  font-weight: 600;
+  @media (max-width: 400px) {
+    font-size: 12px;
+  }
+}
+
+.active-menu-item {
+  font-family: var(--primary-font-family);
+  font-weight: bold;
+  font-size: 18px;
+  @media (max-width: 400px) {
+    font-size: 12px;
+  }
+}
+
+.inactive-menu-item {
+  font-family: var(--primary-font-family);
+  font-weight: bold;
+  font-size: 18px;
+  @media (max-width: 400px) {
+    font-size: 12px;
+  }
+}
+
+.back-button-label {
+  font-family: var(--secondary-font-family);
+  font-weight: 600;
+  font-size: 16px;
+  @media (max-width: 400px) {
+    font-size: 12px;
+  }
+}
+
+.input-field-title {
+  font-family: var(--secondary-font-family);
+  font-weight: 600;
+  font-size: 16px;
+  @media (max-width: 400px) {
+    font-size: 12px;
+  }
+}
+
+.empty-state-message {
+  font-family: var(--primary-font-family);
+  font-weight: 500;
+  font-size: 18px;
+  @media (max-width: 400px) {
+    font-size: 14px;
+  }
+}
