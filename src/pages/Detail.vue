@@ -13,9 +13,5 @@ export default {
 </script>
 
 <style scoped>
-    /* Component styling */
-    h1 {
-      color: var(--primary-color);
-      font-family: var(--font-family);
-    }
+
 </style>
