@@ -55,7 +55,7 @@ function goToHouses() {
   top: 0;
   background-color: var(--backgrund-2-color);
   margin: 0;
-  padding: 0.5em 7rem;
+  padding: 0.5em 8rem;
   display: flex;
   align-items: center;
   -moz-box-shadow: 0 5px 5px rgba(182, 182, 182, 0.75);
