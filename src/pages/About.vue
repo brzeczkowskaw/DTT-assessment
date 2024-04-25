@@ -12,7 +12,7 @@ const subText = ref('Lorem ipsum dolor sit amet, consectetur adipiscing elit, se
       <h2>About DTT Real Estate</h2>
       <p>{{ mainText }}</p>
       <p>{{ subText }}</p>
-      <h2>Design and development</h2>
+      <h2 class="design-title" >Design and development</h2>
       <dev class="logo-space">
         <img src="../assets/img_logo_dtt@3x.png" class="logo" />
         <div>
@@ -26,10 +26,10 @@ const subText = ref('Lorem ipsum dolor sit amet, consectetur adipiscing elit, se
 
 <style scoped>
 .about {
-  padding: 2rem 7rem;
+  padding: 2rem 8rem;
   display: block;
   @media (max-width: 400px) {
-    padding: 2rem;
+    padding: 1.5rem;
   }
 }
 
@@ -59,5 +59,9 @@ const subText = ref('Lorem ipsum dolor sit amet, consectetur adipiscing elit, se
 .contact-text {
   padding: 0;
   margin: 0;
+}
+
+.design-title {
+  margin-top: 2.5em;
 }
 </style>

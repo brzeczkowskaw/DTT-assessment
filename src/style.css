@@ -42,6 +42,7 @@ button {
   font-family: var(--primary-font-family);
   font-weight: bold;
   font-size: 18px;
+  cursor: pointer;
   @media (max-width: 400px) {
     font-size: 12px;
   }
@@ -79,6 +80,15 @@ tab {
   font-weight: 400;
   @media (max-width: 400px) {
     font-size: 12px;
+  }
+}
+
+.price {
+  font-family: var(--secondary-font-family);
+  font-size: 18px;
+  font-weight: 600;
+  @media (max-width: 400px) {
+    font-size: 14px;
   }
 }
 
