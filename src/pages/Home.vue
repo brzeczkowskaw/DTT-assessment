@@ -24,7 +24,10 @@ function searchHouses() {
   <div class="home-page">
     <div class="title-row">
       <h1>Houses</h1>
-      <button class="add-button" @click="goToCreate">+ CREATE NEW</button>
+      <button class="add-button" @click="goToCreate">
+        <img src="../assets/ic_plus_white@3x.png" class="plus-image" />
+        CREATE NEW
+      </button>
     </div>
     <div class="filter-row">
       <div class="input_container">
@@ -38,7 +41,7 @@ function searchHouses() {
           <img src="../assets/ic_search@3x.png" class="input_img">
       </div>
     </div>
-    <div>
+    <div class="houses-list">
       <div v-for="house in housesStore.houses" :key="house.id">
         <HouseCard :houseItem="house" />
       </div>
@@ -69,7 +72,7 @@ function searchHouses() {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  margin-bottom: 2em;
+  margin-bottom: 1em;
 }
 
 .add-button {
@@ -90,7 +93,7 @@ function searchHouses() {
 }
 
 .input-area { 
-  padding: .5em .9em;
+  padding: .5em 1em;
   margin-left: 1.5em;
   background: var(--tertiary-color);
   border: none;
@@ -103,5 +106,14 @@ function searchHouses() {
   left: 10px;
   width:  12px;
   height: 12px;
+}
+
+.plus-image {
+  width:  12px;
+  height: 12px;
+}
+
+.houses-list {
+  margin-bottom: 3em;
 }
 </style>
