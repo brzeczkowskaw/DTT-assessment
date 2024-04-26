@@ -150,3 +150,21 @@ input {
     font-size: 14px;
   }
 }
+
+.button-image {
+  height: 16px;
+  width: 16px;
+  margin-left: .6em;
+}
+
+.buttons-area {
+  display: flex;
+  justify-content: end;
+  width: -webkit-fill-available;
+}
+
+.detail-image {
+  height: 16px;
+  width: 16px;
+  margin-right: .5em;
+}

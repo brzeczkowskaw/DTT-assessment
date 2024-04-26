@@ -1,11 +1,12 @@
 <script setup>
 import NavBar from '../src/components/NavBar.vue'
+
 </script>
 
 <template>
   <div>
     <NavBar />
-    <router-view />
+    <router-view :key="$route.fullPath" />
   </div>
 </template>
 
