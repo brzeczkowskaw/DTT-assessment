@@ -93,31 +93,12 @@ function goToDetails() {
   width: 50%;
 }
 
-.buttons-area {
-  display: flex;
-  justify-content: end;
-  width: -webkit-fill-available;
-}
-
 .listing {
   margin: .3em;
 }
 
 .info-details {
   display: flex;
-}
-
-.detail-image {
-  height: 16px;
-  width: 16px;
-  margin-right: .5em;
-  cursor: pointer;
-}
-
-.button-image {
-  height: 16px;
-  width: 16px;
-  margin-left: .6em;
 }
 
 .details {
