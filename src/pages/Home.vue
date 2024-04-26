@@ -160,7 +160,7 @@ function sortSize() {
 .plus-button {
   height: 1.2em;
   width: 1.2em;
-  cursor: posinter;
+  cursor: pointer;
 }
 
 .filter-row {
