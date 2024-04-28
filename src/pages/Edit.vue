@@ -2,13 +2,22 @@
 import BackToOverviewButton from '../components/BackToOverviewButton.vue'
 import Form from '../components/Form.vue'
 import { computed, ref } from 'vue'
-import { useRouter } from "vue-router"
+import { useHousesStore } from '../store/houses'
+import { useRouter, useRoute } from "vue-router"
 
 const router = useRouter();
+const route = useRoute();
 
-const isNewHouse = computed(() => {
-  return window.location.pathname === '/create';
+const housesStore = useHousesStore();
+
+const isEditHouse = computed(() => {
+  return window.location.pathname.includes('/edit');
 })
+
+if (!isEditHouse) {
+  const houseId = route.params.id;
+  housesStore.getHouseById(houseId);
+}
 
 function backToOverview() {
   router.push('/');
@@ -19,18 +28,18 @@ function backToOverview() {
   <div class="create-page">
     <div class="title-row-desktop">
       <BackToOverviewButton />
-      <h1>Create new listing</h1>
+      <h1>Edit listing</h1>
     </div>
     <div class="title-row-mobile">
       <div class="mobile-title-button">
         <img src="../assets/ic_back_grey@3x.png" @click="backToOverview()" class="back-button" />
       </div>
       <div class="mobile-title">
-        <h1>Create new listing</h1>
+        <h1>Edit listing</h1>
       </div>
     </div>
-    <div class="form-area">
-      <Form :createNew="isNewHouse" />
+    <div class="form-area" v-if="!housesStore.isLoading">
+      <Form :createNew="!isEditHouse" />
     </div>
   </div>
 </template>
@@ -82,9 +91,6 @@ function backToOverview() {
   min-height: 100vh;
   margin-top: -1em;
   padding: 2rem 8rem;
-  @media (max-width: 400px) {
-    padding: 1.5rem;
-  }
 }
 
 .form-area {

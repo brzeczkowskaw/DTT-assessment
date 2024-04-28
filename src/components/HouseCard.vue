@@ -20,14 +20,49 @@ function goToDetails() {
   router.push(`/details/${props.houseItem.id}`)
 }
 
+function openDialog() {
+  housesStore.houseToDelete = props.houseItem.id;
+  const dialog = document.getElementById('isDeleteDialogOpen')
+  dialog.style.display = 'flex';
+}
+
+function closeDialog() {
+  const dialog = document.getElementById('isDeleteDialogOpen')
+  dialog.style.display = 'none';
+}
+
+async function confirmDelete() {
+  try {
+    await housesStore.deleteHouse();
+    alert('House listing deleted');
+    closeDialog();
+  } catch(e) {
+    // handled in the store
+  }
+}
+
+async function editItem() {
+  await housesStore.getHouseById(props.houseItem.id).then(() => {
+    router.push(`/edit/${props.houseItem.id}`);
+  });
+}
 </script>
 
 <template>
-  <div class="house-card" @click="goToDetails()">
-    <div class="image-area">
-      <img :src="props.houseItem.image" class="image" />
+  <div class="house-card">
+    <div class="image-area" @click.prevent="goToDetails()">
+      <img 
+        v-if="props.houseItem.image"
+        :src="props.houseItem.image" 
+        class="image" 
+      />
+      <img 
+        v-if="props.houseItem.image === null" 
+        src="../assets/img_empty_houses@3x.png"
+        class="image-none" 
+      />
     </div>
-    <div class="info-area">
+    <div class="info-area" @click.prevent="goToDetails()">
       <h2 class="listing">{{ props.houseItem.location.street }} {{ props.houseItem.location.houseNumber }} {{ props.houseItem.location.houseNumberAddition }}</h2>
       <p class="price listing">
         &euro; {{ props.houseItem.price }}
@@ -57,9 +92,26 @@ function goToDetails() {
       </div>
     </div>
     <div class="buttons-area" :style="`display: ${showButtons}`">
-      <img src="../assets/ic_edit@3x.png" class="button-image" />
-      <img src="../assets/ic_delete@3x.png" class="button-image" />
+      <img 
+        src="../assets/ic_edit@3x.png" 
+        class="button-image" 
+        @click="editItem()"
+      />
+      <img 
+        src="../assets/ic_delete@3x.png" 
+        class="button-image" 
+        @click.prevent="openDialog()" 
+      />
     </div>
+    <dialog id="isDeleteDialogOpen" style="display: none">
+      <h2>Delete listing</h2>
+      <p class="listing-information">
+        Are you sure you want to delete this listing? <br />
+        This action cannot be undone.
+      </p>
+      <button type="button" class="confirm-delete" @click="confirmDelete()">YES, DELETE</button>
+      <button type="button" class="cancel-delete" @click="closeDialog()">GO BACK</button>
+    </dialog>
   </div>
 </template>
 
@@ -82,6 +134,13 @@ function goToDetails() {
   height: 8em;
   border-radius: 5px;
   object-fit: cover;
+}
+
+.image-none {
+  width: 8em;
+  height: 8em;
+  border-radius: 5px;
+  object-fit: contain;
 }
 
 .image-area {
