@@ -14,15 +14,19 @@ const house = ref();
 const recommendedHouses = ref([]);
 const houseId = route.params.id;
 
-findRandomHouses();
 housesStore.getHouseById(houseId);
+findRandomHouses();
 
 async function findRandomHouses() {
   await housesStore.getAllHouses();
-  for (let i = 0; i <= 2; i++){
-    let house = housesStore.houses[Math.floor(Math.random() * housesStore.houses.length)];
-    recommendedHouses.value.push(house);
-  }
+  recommendedHouses.value = [...housesStore.houses];
+  recommendedHouses.value = recommendedHouses.value
+    .filter((house) => 
+    !house.madeByMe 
+    && (house.price < housesStore.houseDetails.price
+    || house.size > housesStore.houseDetails.size)
+  );
+  recommendedHouses.value = recommendedHouses.value.slice(0, 3)
 }
 
 const showButtons = computed(() => {
@@ -56,8 +60,8 @@ async function confirmDelete() {
 }
 
 async function editItem() {
-  await housesStore.getHouseById(houseId._value).then(() => {
-    router.push(`/edit/${houseId._value}`);
+  await housesStore.getHouseById(housesStore.houseDetails.id).then(() => {
+    router.push(`/edit/${housesStore.houseDetails.id}`);
   });
 }
 

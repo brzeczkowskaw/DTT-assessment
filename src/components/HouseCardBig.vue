@@ -48,8 +48,8 @@ async function confirmDelete() {
 }
 
 async function editItem() {
-  await housesStore.getHouseById(houseId._value).then(() => {
-    router.push(`/edit/${houseId._value}`);
+  await housesStore.getHouseById(housesStore.houseDetails.id).then(() => {
+    router.push(`/edit/${housesStore.houseDetails.id}`);
   });
 }
 </script>
@@ -62,7 +62,6 @@ async function editItem() {
         :src="housesStore.houseDetails.image" 
         class="house-image" 
       />
-      {{ housesStore.houseDetails.image }}
       <img 
         v-if="housesStore.houseDetails.image === null" 
         src="../assets/img_empty_houses@3x.png"
@@ -71,7 +70,7 @@ async function editItem() {
     </div>
     <div class="info-area">
       <div class="title-row">
-        <h2 class="address">{{ housesStore.houseDetails.location.street }} {{ housesStore.houseDetails.location.houseNumber }}</h2>
+        <h2 class="address">{{ housesStore.houseDetails.location.street }} {{ housesStore.houseDetails.location.houseNumber }}{{ housesStore.houseDetails.location.houseNumberAddition }}</h2>
         <div class="buttons-area buttons-area-mobile" :style="`display: ${showButtons}`">
           <img 
             src="../assets/ic_edit@3x.png" 
@@ -196,6 +195,7 @@ async function editItem() {
 
 .address {
   margin: .5em 0;
+  min-width: 80%;
 }
 
 .detail-line {

@@ -25,7 +25,7 @@ const routes = [
     {
         path: '/edit/:id',
         component: Edit
-    }
+    },
 ];
 
 const router = createRouter({

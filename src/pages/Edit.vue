@@ -25,7 +25,7 @@ function backToOverview() {
 </script>
 
 <template>
-  <div class="create-page">
+  <div class="edit-page">
     <div class="title-row-desktop">
       <BackToOverviewButton />
       <h1>Edit listing</h1>
@@ -84,13 +84,16 @@ function backToOverview() {
   }
 }
 
-.create-page {
+.edit-page {
   background-image: url('../assets/img_background@3x.png');
   background-size: cover;
   max-width: 100vw;
   min-height: 100vh;
   margin-top: -1em;
   padding: 2rem 8rem;
+  @media (max-width: 400px) {
+    padding: 1.5em;
+  }
 }
 
 .form-area {

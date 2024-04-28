@@ -40,6 +40,38 @@ export const useHousesStore = defineStore("housesStore", {
     isLoading: false,
   }),
   actions: {
+    clearObjects() {
+      this.newHouse = {
+        price: null,
+        bedrooms: null,
+        bathrooms: null,
+        size: null,
+        streetName: null,
+        houseNumber: null,
+        numberAddition: null,
+        zip: null,
+        city: null,
+        constructionYear: null,
+        hasGarage: null,
+        description: null,
+        image: null,
+      };
+      this.houseToEdit = {
+        price: null,
+        bedrooms: null,
+        bathrooms: null,
+        size: null,
+        streetName: null,
+        houseNumber: null,
+        numberAddition: null,
+        zip: null,
+        city: null,
+        constructionYear: null,
+        hasGarage: null,
+        description: null,
+        image: null,
+      }
+    },
     async getAllHouses() {
       if (this.houses.length > 0) {
         return;
@@ -79,6 +111,8 @@ export const useHousesStore = defineStore("housesStore", {
         const { data } = await http.post('/houses', this.newHouse);
         await this.updatePhoto(data.id, this.newHouse);
         this.isLoading = false;
+        this.clearObjects();
+        return data.id;
       } catch (e) {
         alert(e);
         this.isLoading = false;

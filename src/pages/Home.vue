@@ -64,7 +64,7 @@ const sizeButtonColor = computed(() => {
 function sortPrice() {
   filter.value = filter.value === 'price' ? null : 'price';
   if (filter.value === null) {
-    housesList.value = housesStore.houses;
+    housesList.value.sort((a, b) => (a.id > b.id ? 1 : -1));
     return;
   }
   housesList.value.sort((a, b) => (a.price > b.price ? 1 : -1));
@@ -73,7 +73,7 @@ function sortPrice() {
 function sortSize() {
   filter.value = filter.value === 'size' ? null : 'size';
   if (filter.value === null) {
-    housesList.value = housesStore.houses;
+    housesList.value.sort((a, b) => (a.id > b.id ? 1 : -1));
     return;
   }
   housesList.value.sort((a, b) => (a.size > b.size ? 1 : -1));
@@ -103,7 +103,7 @@ function sortSize() {
             v-model="searchItem" 
             type="text" 
             class="input-area" 
-            placeholder="Search for houses"
+            placeholder="Search for houses and press enter"
             @keyup.enter="searchHouses()"
           >
           <img src="../assets/ic_search@3x.png" class="input_img">
