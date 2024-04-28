@@ -25,19 +25,64 @@ function numberWithDots(number) {
   return number.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ".");
 }
 
+function openDialog() {
+  housesStore.houseToDelete = houseId;
+  const dialog = document.getElementById('isDeleteDialogOpen')
+  dialog.style.display = 'flex';
+}
+
+function closeDialog() {
+  const dialog = document.getElementById('isDeleteDialogOpen')
+  dialog.style.display = 'none';
+}
+
+async function confirmDelete() {
+  try {
+    await housesStore.deleteHouse();
+    alert('House listing deleted');
+    closeDialog();
+    router.push('/');
+  } catch(e) {
+    // handled in the store
+  }
+}
+
+async function editItem() {
+  await housesStore.getHouseById(houseId._value).then(() => {
+    router.push(`/edit/${houseId._value}`);
+  });
+}
 </script>
 
 <template>
-  <div class="house-big-card" v-if="housesStore.houseDetails">
+  <div class="house-big-card" :loading="housesStore.isLoading" v-if="housesStore.houseDetails">
     <div>
-      <img :src="housesStore.houseDetails.image" class="house-image" />
+      <img 
+        v-if="!!housesStore.houseDetails.image"
+        :src="housesStore.houseDetails.image" 
+        class="house-image" 
+      />
+      {{ housesStore.houseDetails.image }}
+      <img 
+        v-if="housesStore.houseDetails.image === null" 
+        src="../assets/img_empty_houses@3x.png"
+        class="house-image" 
+      />
     </div>
     <div class="info-area">
       <div class="title-row">
         <h2 class="address">{{ housesStore.houseDetails.location.street }} {{ housesStore.houseDetails.location.houseNumber }}</h2>
         <div class="buttons-area buttons-area-mobile" :style="`display: ${showButtons}`">
-          <img src="../assets/ic_edit@3x.png" class="button-image" />
-          <img src="../assets/ic_delete@3x.png" class="button-image" />
+          <img 
+            src="../assets/ic_edit@3x.png" 
+            class="button-image" 
+            @click="editItem()"
+          />
+          <img 
+            src="../assets/ic_delete@3x.png" 
+            class="button-image" 
+            @click="openDialog()" 
+          />
         </div>
       </div>
       <div class="info-row">
@@ -94,6 +139,15 @@ function numberWithDots(number) {
         </p>
       </div>
     </div>
+    <dialog id="isDeleteDialogOpen" style="display: none">
+      <h2>Delete listing</h2>
+      <p class="listing-information">
+        Are you sure you want to delete this listing? <br />
+        This action cannot be undone.
+      </p>
+      <button type="button" class="confirm-delete" @click="confirmDelete()">YES, DELETE</button>
+      <button type="button" class="cancel-delete" @click="closeDialog()">GO BACK</button>
+    </dialog>
   </div>
 </template>
 

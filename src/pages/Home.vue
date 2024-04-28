@@ -7,7 +7,7 @@ import HouseCard from '../components/HouseCard.vue'
 const router = useRouter();
 const housesStore = useHousesStore();
 
-const searchItem = ref();
+const searchItem = ref('');
 const filter = ref();
 const housesList = ref();
 
@@ -22,6 +22,7 @@ function searchHouses() {
     housesList.value = housesStore.houses;
     return;
   }
+  housesList.value = housesStore.houses;
   housesList.value = housesList.value.filter((item) => {
     if (item.location.city.toLowerCase().includes(searchItem.value.toLowerCase())) {
       return item;
@@ -36,6 +37,15 @@ function searchHouses() {
       return item;
     }
   })
+  const results = document.getElementById('show-results');
+  results.style.display = 'block';
+}
+
+function clearSearch() {
+  housesList.value = housesStore.houses;
+  searchItem.value = '';
+  const results = document.getElementById('show-results');
+  results.style.display = 'none';
 }
 
 async function getHouses() {
@@ -90,23 +100,39 @@ function sortSize() {
     <div class="filter-row">
       <div class="input_container">
           <input 
-            v-model.lazy="searchItem" 
+            v-model="searchItem" 
             type="text" 
             class="input-area" 
             placeholder="Search for houses"
             @keyup.enter="searchHouses()"
           >
           <img src="../assets/ic_search@3x.png" class="input_img">
+          <img 
+            src="../assets/ic_clear@3x.png" 
+            class="input_img-clear"
+            v-if="searchItem.length > 0"
+            @click="clearSearch()"
+          >
       </div>
       <div class="buttons-container">
         <button class="price-button" @click="sortPrice()" :style="`background: ${priceButtonColor}`">Price</button>
         <button class="size-button" @click="sortSize()" :style="`background: ${sizeButtonColor}`">Size</button>
       </div>
     </div>
-    <div class="houses-list">
+    <div class="houses-list" :loading="housesStore.isLoading" v-if="!housesStore.isLoading && housesList.length > 0">
+      <h3 id="show-results" style="display: none">
+        {{ housesList.length }} result(s) found
+      </h3>
       <div v-for="house in housesList" :key="house.id">
         <HouseCard :houseItem="house" />
       </div>
+    </div>
+    <div class="empty-houses-list" v-if="!housesStore.isLoading && housesList.length < 1">
+      <img src="../assets/img_empty_houses@3x.png" class="empty-house-image" />
+      <p class="error-message error-message-home">
+        No results found. <br>
+        Please try another keyword.
+      </p>
     </div>
   </div>
 </template>
@@ -169,7 +195,7 @@ function sortSize() {
   align-items: center;
   width: 100%;
   margin-bottom: 1em;
-  @media (max-width: 750px) {
+  @media (max-width: 800px) {
     display: block;
   }
 }
@@ -187,7 +213,7 @@ function sortSize() {
   border: none;
   border-radius: 7px 0 0 7px;
   color: var(--tertiary-color);
-  @media (max-width: 750px) {
+  @media (max-width: 800px) {
     margin-top: 1em;
     width: 50%;
   }
@@ -198,7 +224,7 @@ function sortSize() {
   border: none;
   border-radius: 0 7px 7px 0;
   color: var(--tertiary-color);
-  @media (max-width: 750px) {
+  @media (max-width: 800px) {
     margin-top: 1em;
     width: 50%;
   }
@@ -235,6 +261,15 @@ input:focus {
   height: 12px;
 }
 
+.input_img-clear {
+  position:absolute;
+  bottom: 10px;
+  right: 10px;
+  width:  12px;
+  height: 12px;
+  cursor: pointer;
+}
+
 .plus-image {
   width:  12px;
   height: 12px;
@@ -242,5 +277,25 @@ input:focus {
 
 .houses-list {
   margin-bottom: 3em;
+}
+
+.empty-house-image {
+  height: 10em;
+  margin-bottom: 1.5em;
+}
+
+.empty-houses-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5em;
+  @media (max-width: 750px) {
+    margin-top: 10em;
+  }
+}
+
+.error-message-home {
+  text-align: center;
 }
 </style>

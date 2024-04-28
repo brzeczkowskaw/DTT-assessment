@@ -3,6 +3,7 @@ import Home from '../pages/Home.vue';
 import Create from '../pages/Create.vue';
 import About from '../pages/About.vue';
 import Detail from '../pages/Detail.vue';
+import Edit from '../pages/Edit.vue';
 
 const routes = [
     {    
@@ -20,6 +21,10 @@ const routes = [
     {
         path: '/details/:id',
         component: Detail
+    },
+    {
+        path: '/edit/:id',
+        component: Edit
     }
 ];
 
