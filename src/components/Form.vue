@@ -132,9 +132,11 @@ async function submitForm() {
   }
   try {
     if (props.createNew) {
+      console.log('new');
       const newHouseId = await housesStore.uploadNewHouse();
       router.push(`/details/${newHouseId}`);
     } else {
+      console.log('edit');
       await housesStore.updateHouse();
       router.push(`/details/${housesStore.houseToEdit.id}`);
     }
@@ -174,6 +176,7 @@ async function submitForm() {
             placeholder="Enter house number"
             type="number"
             :class="isHouseNumberValid ? '' : 'invalid-field'"
+            min="1"
           />
           <p class="error-message invalid-field-text" v-if="!isHouseNumberValid">Field is required</p>
         </div>
@@ -253,6 +256,7 @@ async function submitForm() {
             placeholder="e.g. 500000"
             type="number"
             :class="isPriceValid ? '' : 'invalid-field'"
+            min="1"
           />
           <p class="error-message invalid-field-text" v-if="!isPriceValid">Field is required</p>
         </div>
@@ -268,6 +272,7 @@ async function submitForm() {
             placeholder="e.g. 120"
             type="number"
             :class="isSizeValid ? '' : 'invalid-field'"
+            min="1"
           />
           <p class="error-message invalid-field-text" v-if="!isSizeValid">Field is required</p>
         </div>
@@ -293,6 +298,7 @@ async function submitForm() {
             placeholder="Number of bedrooms"
             type="number"
             :class="isBedroomsValid ? '' : 'invalid-field'"
+            min="1"
           />
           <p class="error-message invalid-field-text" v-if="!isBedroomsValid">Field is required</p>
         </div>
@@ -306,6 +312,7 @@ async function submitForm() {
             placeholder="Number of bathrooms"
             type="number"
             :class="isBathroomsValid ? '' : 'invalid-field'"
+            min="1"
           />
           <p class="error-message invalid-field-text" v-if="!isBathroomsValid">Field is required</p>
         </div>
@@ -321,6 +328,7 @@ async function submitForm() {
             placeholder="e.g. 1990"
             type="number"
             :class="isConstructionYearValid ? '' : 'invalid-field'"
+            min="1990"
           />
           <p class="error-message invalid-field-text" v-if="!isConstructionYearValid">Field is required</p>
         </div>

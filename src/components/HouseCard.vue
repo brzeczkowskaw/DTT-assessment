@@ -63,7 +63,7 @@ async function editItem() {
       />
     </div>
     <div class="info-area" @click.prevent="goToDetails()">
-      <h2 class="listing">{{ props.houseItem.location.street }} {{ props.houseItem.location.houseNumber }} {{ props.houseItem.location.houseNumberAddition }}</h2>
+      <h2 class="listing">{{ props.houseItem.location.street }} {{ props.houseItem.location.houseNumber }}{{ props.houseItem.location.houseNumberAddition }}</h2>
       <p class="price listing">
         &euro; {{ props.houseItem.price }}
       </p>
